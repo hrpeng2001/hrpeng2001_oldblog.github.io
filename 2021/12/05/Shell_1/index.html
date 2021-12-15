@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Shell 入门大纲 | HrPeng</title><meta name="keywords" content="Shell, Linux"><meta name="author" content="Hongrui Peng"><meta name="copyright" content="Hongrui Peng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、Shell简介与脚本运行&amp;emsp;&amp;emsp;Shell即“命令解释器”，是用户同计算机内核交互的桥梁；包括图形界面的Shell和命令行界面的Shell。在本文中，关注的是Linux系统下命令行界面的Shell，在Linux系统中，Shell既是一种命令语言，又是程序设计语言。&amp;emsp;&amp;emsp;Linux下，有多种Shell，包括Bourne Shell(&#x2F;usr&#x2F;bin&#x2F;sh 或 b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell 入门大纲">
+<meta property="og:url" content="http://example.com/2021/12/05/Shell_1/index.html">
+<meta property="og:site_name" content="HrPeng">
+<meta property="og:description" content="一、Shell简介与脚本运行&amp;emsp;&amp;emsp;Shell即“命令解释器”，是用户同计算机内核交互的桥梁；包括图形界面的Shell和命令行界面的Shell。在本文中，关注的是Linux系统下命令行界面的Shell，在Linux系统中，Shell既是一种命令语言，又是程序设计语言。&amp;emsp;&amp;emsp;Linux下，有多种Shell，包括Bourne Shell(&#x2F;usr&#x2F;bin&#x2F;sh 或 b">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-12-05T08:23:21.000Z">
+<meta property="article:modified_time" content="2021-12-06T06:54:41.059Z">
+<meta property="article:author" content="Hongrui Peng">
+<meta property="article:tag" content="Shell, Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/12/05/Shell_1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Shell 入门大纲',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-06 14:54:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jfif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/research/"><i class="fa-fw fas fa-globe-asia"></i><span> 研究</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 笔记</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/studynote/"><i class="fa-fw fas fa-university"></i><span> 学习笔记</span></a></li><li><a class="site-page child" href="/categories/novel/"><i class="fa-fw fas fa-book"></i><span> 杂文趣谈</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HrPeng</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/research/"><i class="fa-fw fas fa-globe-asia"></i><span> 研究</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book-open"></i><span> 笔记</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/studynote/"><i class="fa-fw fas fa-university"></i><span> 学习笔记</span></a></li><li><a class="site-page child" href="/categories/novel/"><i class="fa-fw fas fa-book"></i><span> 杂文趣谈</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Shell 入门大纲</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-05T08:23:21.000Z" title="发表于 2021-12-05 16:23:21">2021-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-06T06:54:41.059Z" title="更新于 2021-12-06 14:54:41">2021-12-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/studynote/">studynote</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Shell 入门大纲"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、Shell简介与脚本运行"><a href="#一、Shell简介与脚本运行" class="headerlink" title="一、Shell简介与脚本运行"></a>一、Shell简介与脚本运行</h2><p>&emsp;&emsp;Shell即“命令解释器”，是用户同计算机内核交互的桥梁；包括图形界面的Shell和命令行界面的Shell。在本文中，关注的是Linux系统下命令行界面的Shell，在Linux系统中，Shell既是一种命令语言，又是程序设计语言。<br>&emsp;&emsp;Linux下，有多种Shell，包括Bourne Shell(/usr/bin/sh 或 bin/sh)、Bourne Again Shell(/bin/bash)、C Shell(/usr/bin/csh)、K Shell(/usr/bin/ksh)、Shell of Root(/sbin/sh)。关于各种Shell的差别，可以参考：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Comparison_of_command_shells">https://en.wikipedia.org/wiki/Comparison_of_command_shells</a><br>&emsp;&emsp;注意：本教程大纲以bash为例进行介绍。</p>
+<p>Shell脚本，即使用Shell编写的脚本程序，运行脚本具有两种方法：<br>（1）作为可执行程序（该方式在脚本文件内部需要在首行以“#！”标明解释器）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ./test.sh</span><br><span class="line">./test.sh	<span class="comment">#注意加“./”表示在当前目录</span></span><br></pre></td></tr></table></figure>
+<p>（2）作为解释器参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh test.sh</span><br><span class="line">/bin/php test.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、Shell变量"><a href="#二、Shell变量" class="headerlink" title="二、Shell变量"></a>二、Shell变量</h2><h3 id="2-1-变量的命名规则"><a href="#2-1-变量的命名规则" class="headerlink" title="2.1 变量的命名规则"></a>2.1 变量的命名规则</h3><ul>
+<li>shell的变量命名规则同其他编程语言是类似的，包括以下规则：</li>
+<li>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。</li>
+<li>中间不能有空格</li>
+<li>不能使用下划线以外的标点符号</li>
+<li>不能使用bash的关键字</li>
+</ul>
+<h3 id="2-2-变量的引用、属性"><a href="#2-2-变量的引用、属性" class="headerlink" title="2.2 变量的引用、属性"></a>2.2 变量的引用、属性</h3><p>&emsp;&emsp;在bash对变量进行赋值时，不需要加美元符号“$”；但对变量进行引用时，需要加美元符号“$”，并建议使用大括号“{ }”包住变量，以表示变量的边界。<br>&emsp;&emsp;声明变量后，使用readonly可指定其为只读变量，使用unset可以删除变量。</p>
+<h3 id="2-3-变量的类型"><a href="#2-3-变量的类型" class="headerlink" title="2.3 变量的类型"></a>2.3 变量的类型</h3><p>&emsp;&emsp;shell程序的变量从作用范围上分，可以分为局部变量、环境变量、和shell变量；从数据类型上分，则主要有字符串变量和数值变量。</p>
+<h4 id="2-3-1-字符串变量"><a href="#2-3-1-字符串变量" class="headerlink" title="2.3.1 字符串变量"></a>2.3.1 字符串变量</h4><p>字符串，可以用单引号、双引号、或不用引号；但单引号中变量是无效的，转义字符也是无效的。<br>（1）拼接字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hh=<span class="string">&quot;world!&quot;</span></span><br><span class="line">greeting1=<span class="string">&quot;Hello, <span class="variable">$&#123;hh&#125;</span>!&quot;</span></span><br><span class="line">greeting2=<span class="string">&#x27;Hello, $&#123;hh&#125;!&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$greeting1</span> <span class="variable">$greeting2</span></span><br></pre></td></tr></table></figure>
+<p>（2）获取字符串长度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=“abcd”</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#string&#125;</span>	<span class="comment">#输出为4</span></span><br></pre></td></tr></table></figure>
+<p>（3）提取子字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=“abcd”</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;string1:3&#125;</span>	<span class="comment">#输出为bcd</span></span><br></pre></td></tr></table></figure>
+<p>（4）查找子字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=“abcd”</span><br><span class="line"><span class="built_in">echo</span> `expr index <span class="string">&quot;<span class="variable">$string</span>&quot;</span> io`		<span class="comment">#输出4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-2-数组变量"><a href="#2-3-2-数组变量" class="headerlink" title="2.3.2 数组变量"></a>2.3.2 数组变量</h4><p>bash支持一维数组，下标从零开始，元素用空格分割</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数组名=（值1 值2 值3.... 值n） <span class="comment">#数组的定义形式</span></span><br><span class="line">数组名[1]=value1 <span class="comment">#单独定义各个分量</span></span><br></pre></td></tr></table></figure>
+<p>（1）数组的读取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">valuen=<span class="variable">$&#123;array_name[n]&#125;</span>	<span class="comment">#读取单个元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;array_name[@]&#125;</span>	<span class="comment">#获取所有元素</span></span><br></pre></td></tr></table></figure>
+<p>（2）获取数组的长度<br>同字符串类似的，使用“#”读取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">length=<span class="variable">$&#123;#array_name[@]&#125;</span>	<span class="comment">#获取数组元素的个数</span></span><br><span class="line">length=<span class="variable">$&#123;#array_name[*]&#125;</span>	<span class="comment">#获取数组元素的个数</span></span><br><span class="line">length=<span class="variable">$&#123;#array_name[n]&#125;</span>	<span class="comment">#获取单个元素的长度</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Shell注释"><a href="#2-4-Shell注释" class="headerlink" title="2.4 Shell注释"></a>2.4 Shell注释</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单行注释</span></span><br><span class="line">: &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、Shell传递参数"><a href="#三、Shell传递参数" class="headerlink" title="三、Shell传递参数"></a>三、Shell传递参数</h2><p>&emsp;&emsp;无论对于函数还是脚本，都以在文件或函数名后空格加参数的方式传递参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">fun</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br><span class="line">fun 1 2 3</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在脚本或函数内，则以$n的形式获取参数。<br>此外，有几个特殊字符用于处理参数：</p>
+<ul>
+<li>$#        传递到脚本的参数个数</li>
+<li>$*        以当个字符串显示所有向脚本传递的参数</li>
+<li>$$        脚本运行的当前进程ID号</li>
+<li>$!        后台运行的最后一个进程的ID号</li>
+<li>$@        与$*相似，但是逐个返回这些参数</li>
+<li>$-        显示Shell使用的当前选项</li>
+<li>$?        显示最后命令的退出状态</li>
+</ul>
+<h2 id="四、Shell基本运算符"><a href="#四、Shell基本运算符" class="headerlink" title="四、Shell基本运算符"></a>四、Shell基本运算符</h2><p>&emsp;&emsp;Shell支持多种运算符，包括：算数、关系、布尔、字符串、文件测试运算符。<br>&emsp;&emsp;原生bash不支持简单的数学运算，但是可以通过其它命令实现，例如awk和expr<br>Eg.,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val = `expr 2 + 2`	<span class="comment">#4</span></span><br></pre></td></tr></table></figure>
+<p>注意，表示和运算符之间必须有空格！</p>
+<ul>
+<li>算术运算符（“+”“-”“*”“/”“%”“=”“==”“!=”）</li>
+<li>关系运算符（“-eq”“-ne”“-gt”“-lt”“-ge”“-le”）</li>
+<li>布尔运算符（“！”“-o”“-a”）</li>
+<li>逻辑运算符 （“&amp;&amp;”“||”）和布尔运算符差不多，但要两个中括号包裹</li>
+<li>字符串运算符（“=”“！=”“-z”“-n”“$”）</li>
+<li>文件测试运算符（“-b”“-c”“-d”“-f”“-g”“-k”“-p”“-u”“-r”“-w”“-x”“-s”“-e”“-S”“-L”）</li>
+</ul>
+<p>注意除了expr等命令内部的表达式，其余的表达式一般都要在表达式外加中括号。</p>
+<h2 id="五、Shell-的输出命令（echo-和-printf）"><a href="#五、Shell-的输出命令（echo-和-printf）" class="headerlink" title="五、Shell 的输出命令（echo 和 printf）"></a>五、Shell 的输出命令（echo 和 printf）</h2><h3 id="5-1-echo-命令"><a href="#5-1-echo-命令" class="headerlink" title="5.1 echo 命令"></a>5.1 echo 命令</h3><p>用于字符串输出的常用命令。命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> string</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-printf命令"><a href="#5-2-printf命令" class="headerlink" title="5.2 printf命令"></a>5.2 printf命令</h3><p>printf的特色在于可以使用format-string，控制输出字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> format-string [arguments ...]</span><br></pre></td></tr></table></figure>
+<p>格式串中，%s %c %d %f 都是格式替代符，%s 字符串；%d 整型；% c 单个字符；%f 实数，小数形式；-指定左对齐，没有-指定右对齐；数值指定宽度，小数点和小数点后的数值指定保留位数。<br>Eg.,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%-10s %-8s %-4s\n&quot;</span> 姓名 性别 体重kg </span><br></pre></td></tr></table></figure>
+<p>printf的转义序列包括：</p>
+<ul>
+<li>\a        警告字符</li>
+<li>\b        后退</li>
+<li>\c        抑制</li>
+<li>\f        换页</li>
+<li>\n        换行</li>
+<li>\r        回车</li>
+<li>\t        水平制表符</li>
+<li>\v        垂直制表符</li>
+<li>\         一个字面上的反斜杠字符</li>
+<li>\ddd        表示1到3位的八进制值的字符。仅在格式字符串中有效。</li>
+<li>\0ddd        表示1到3位的八进制值的字符</li>
+</ul>
+<h2 id="六、流程控制"><a href="#六、流程控制" class="headerlink" title="六、流程控制"></a>六、流程控制</h2><h3 id="6-1-判断"><a href="#6-1-判断" class="headerlink" title="6.1 判断"></a>6.1 判断</h3><p>Eg.,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数值测试</span></span><br><span class="line">num1=100</span><br><span class="line">num2=100</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> $[num1] -eq $[num2]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;相等！&#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span><span class="string">&#x27;不相等！&#x27;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字符串测试</span></span><br><span class="line">num1=<span class="string">&quot;ru1noob&quot;</span></span><br><span class="line">num2=<span class="string">&quot;runoob&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> <span class="variable">$num1</span> =<span class="variable">$num2</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;相等&#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span><span class="string">&#x27;不等&#x27;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件测试</span></span><br><span class="line"><span class="built_in">cd</span> /bin</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> -e ./bash</span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&#x27;文件存在&#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span><span class="string">&#x27;文件不存在&#x27;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if elif else</span></span><br><span class="line"><span class="keyword">if</span> condition</span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line">	command1</span><br><span class="line"><span class="keyword">elif</span> condition2</span><br><span class="line">	command2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	command3</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>注意，如果else分支没有语句执行，就不要写else</p>
+<h3 id="6-2循环"><a href="#6-2循环" class="headerlink" title="6.2循环"></a>6.2循环</h3><h4 id="6-2-1-for循环"><a href="#6-2-1-for循环" class="headerlink" title="6.2.1 for循环"></a>6.2.1 for循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> loop <span class="keyword">in</span> 1 2 3 4 5 </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;The value is: <span class="variable">$loop</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-2-2-while-语句"><a href="#6-2-2-while-语句" class="headerlink" title="6.2.2 while 语句"></a>6.2.2 while 语句</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int = 1</span><br><span class="line"><span class="keyword">while</span> (( <span class="variable">$int</span> &lt;= 5))</span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$int</span></span><br><span class="line">	<span class="built_in">let</span> <span class="string">&quot;int ++&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-2-3-until循环"><a href="#6-2-3-until循环" class="headerlink" title="6.2.3 until循环"></a>6.2.3 until循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=0</span><br><span class="line">until [ ! <span class="variable">$a</span> -lt 10 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$a</span></span><br><span class="line">	a=`expr <span class="variable">$a</span> + 1`</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-2-4-case-…-esac"><a href="#6-2-4-case-…-esac" class="headerlink" title="6.2.4 case … esac"></a>6.2.4 case … esac</h4><p>case … easc 为多选择语句，是一种多分支选择结构，每个case分支以右圆括号开始，用两个分号;;表示break，即执行结束。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> aNum</span><br><span class="line"><span class="keyword">case</span> <span class="variable">$aNum</span> <span class="keyword">in</span></span><br><span class="line">	1) <span class="built_in">echo</span> <span class="string">&#x27;1&#x27;</span></span><br><span class="line">	;;</span><br><span class="line">	2) <span class="built_in">echo</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line">	;;</span><br><span class="line">	3) <span class="built_in">echo</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line">	;;</span><br><span class="line">	*) <span class="built_in">echo</span> <span class="string">&#x27;not 1, 2, or 3&#x27;</span></span><br><span class="line">	;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>6.2.5 跳出循环<br>在循环过程中，有两种方法强制跳出循环，为continue和break<br>break命令允许跳出所有的循环<br>continue命令则仅仅跳出当次循环</p>
+<h2 id="七、函数"><a href="#七、函数" class="headerlink" title="七、函数"></a>七、函数</h2><h3 id="7-1-函数定义"><a href="#7-1-函数定义" class="headerlink" title="7.1 函数定义"></a>7.1 函数定义</h3><p>shell中函数定义如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="keyword">function</span> ] funname [( )]</span><br><span class="line">&#123;</span><br><span class="line">	action;</span><br><span class="line">	[<span class="built_in">return</span> int; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以带function fun()定义，也可以直接fun()定义，不带任何参数。<br>参数返回，可以使用return 返回，如果不使用return，则返回最后一条命令的结果。<br>函数的返回值在调用该函数后可以通过$?来获得<br>注意：所有函数在使用前必须进行定义。所以通常函数的定义放在脚本的开始部分。</p>
+<h3 id="7-2-函数参数"><a href="#7-2-函数参数" class="headerlink" title="7.2 函数参数"></a>7.2 函数参数</h3><p>同向脚本传递参数类似的，调用函数时可以向其传递参数；在函数体内部，通过$n的形式获取参数的值，$1-$9，获取第十个以上的参数需要用${n}。<br>此外，特殊字符同第三节中是完全一致的：</p>
+<ul>
+<li>$#        传递到脚本的参数个数</li>
+<li>$*        以当个字符串显示所有向脚本传递的参数</li>
+<li>$$        脚本运行的当前进程ID号</li>
+<li>$!        后台运行的最后一个进程的ID号</li>
+<li>$@        与$*相似，但是逐个返回这些参数</li>
+<li>$-        显示Shell使用的当前选项</li>
+<li>$?        显示最后命令的退出状态</li>
+</ul>
+<h2 id="八、输入和输出的重定向"><a href="#八、输入和输出的重定向" class="headerlink" title="八、输入和输出的重定向"></a>八、输入和输出的重定向</h2><h3 id="8-1-重定向方法"><a href="#8-1-重定向方法" class="headerlink" title="8.1 重定向方法"></a>8.1 重定向方法</h3><p>UNIX的默认的标准输入输出都是终端，重定向则通常到文件。<br>重定向列表如下：</p>
+<ul>
+<li>command &gt; file        输出重定向到file</li>
+<li>command &lt; file        输入重定向到file</li>
+<li>command &gt;&gt; file        将输出以追加的方式重定向到file</li>
+<li>n &gt; file            将文件描述符为n的文件重定向到file</li>
+<li>n &gt;&gt; file        将文件描述符为n的文件以追加的方式重定向到file</li>
+<li>n &gt;&amp; m        将输出文件m和n合并</li>
+<li>n &lt;&amp; m        将输入文件m和n合并</li>
+<li>&lt;&lt;tag            将开始标记tag和结束标记tag之间的内容作为输入</li>
+</ul>
+<h3 id="8-2-重定向的本质"><a href="#8-2-重定向的本质" class="headerlink" title="8.2 重定向的本质"></a>8.2 重定向的本质</h3><p>一般情况，Unix/Linux命令运行都会打开三个文件：标准输入（stdin）、标准输出文件（stdout）、标准错误文件（stderr）；文件描述符分别为0、1、2。<br>例如，要将stdout和stderr合并重定向到file：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> &gt;&gt; file 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-Here-Document"><a href="#8-3-Here-Document" class="headerlink" title="8.3 Here Document"></a>8.3 Here Document</h3><p>Here Document 是 Shell中的特殊重定向方式，用于将输入重定向到一个交互式的Shell脚本或程序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> &lt;&lt; <span class="string">delimiter</span></span><br><span class="line"><span class="string">	document</span></span><br><span class="line"><span class="string">delimiter</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-4-dev-null-文件"><a href="#8-4-dev-null-文件" class="headerlink" title="8.4 /dev/null 文件"></a>8.4 /dev/null 文件</h3><p>/dev/null 是一个特殊文件，写入的内容会被丢弃，如果不希望结果在屏幕上显示，可以重定向到/dev/null:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<h2 id="九、Shell文件包含"><a href="#九、Shell文件包含" class="headerlink" title="九、Shell文件包含"></a>九、Shell文件包含</h2><p>在Shell 文件内部可以包含外部脚本。从而封装一些公用代码作为独立文件，语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">. filename		<span class="comment"># method 1</span></span><br><span class="line"><span class="built_in">source</span> filename		<span class="comment"># method 2</span></span><br></pre></td></tr></table></figure>
+<p>注意：被包含的文件在执行主文件时不需要单独赋予可执行权限</p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Hongrui Peng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/12/05/Shell_1/">http://example.com/2021/12/05/Shell_1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">HrPeng</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Shell-Linux/">Shell, Linux</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/11/28/animerecommendation/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">番剧推荐</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Shell%E7%AE%80%E4%BB%8B%E4%B8%8E%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C"><span class="toc-text">一、Shell简介与脚本运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Shell%E5%8F%98%E9%87%8F"><span class="toc-text">二、Shell变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8F%98%E9%87%8F%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-text">2.1 变量的命名规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8F%98%E9%87%8F%E7%9A%84%E5%BC%95%E7%94%A8%E3%80%81%E5%B1%9E%E6%80%A7"><span class="toc-text">2.2 变量的引用、属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8F%98%E9%87%8F%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.3 变量的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E9%87%8F"><span class="toc-text">2.3.1 字符串变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-%E6%95%B0%E7%BB%84%E5%8F%98%E9%87%8F"><span class="toc-text">2.3.2 数组变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Shell%E6%B3%A8%E9%87%8A"><span class="toc-text">2.4 Shell注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Shell%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-text">三、Shell传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Shell%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">四、Shell基本运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81Shell-%E7%9A%84%E8%BE%93%E5%87%BA%E5%91%BD%E4%BB%A4%EF%BC%88echo-%E5%92%8C-printf%EF%BC%89"><span class="toc-text">五、Shell 的输出命令（echo 和 printf）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-echo-%E5%91%BD%E4%BB%A4"><span class="toc-text">5.1 echo 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-printf%E5%91%BD%E4%BB%A4"><span class="toc-text">5.2 printf命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-text">六、流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%88%A4%E6%96%AD"><span class="toc-text">6.1 判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E5%BE%AA%E7%8E%AF"><span class="toc-text">6.2循环</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-1-for%E5%BE%AA%E7%8E%AF"><span class="toc-text">6.2.1 for循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-2-while-%E8%AF%AD%E5%8F%A5"><span class="toc-text">6.2.2 while 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-3-until%E5%BE%AA%E7%8E%AF"><span class="toc-text">6.2.3 until循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-4-case-%E2%80%A6-esac"><span class="toc-text">6.2.4 case … esac</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%87%BD%E6%95%B0"><span class="toc-text">七、函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-text">7.1 函数定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">7.2 函数参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">八、输入和输出的重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%B9%E6%B3%95"><span class="toc-text">8.1 重定向方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E9%87%8D%E5%AE%9A%E5%90%91%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-text">8.2 重定向的本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-Here-Document"><span class="toc-text">8.3 Here Document</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-dev-null-%E6%96%87%E4%BB%B6"><span class="toc-text">8.4 &#x2F;dev&#x2F;null 文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81Shell%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-text">九、Shell文件包含</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Hongrui Peng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = new Waline(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://myblog-comment-frke6xcts-hrpeng2001.vercel.app',
+      path: location.pathname,
+      visitor: false,
+      dark: 'html[data-theme="dark"]'
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js').then(initWaline)
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
